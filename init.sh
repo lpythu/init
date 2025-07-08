@@ -171,12 +171,13 @@ main() {
     # 检查root权限
     check_root
     
+    # 选择云厂商
+    CLOUD_VENDOR=$(select_cloud_vendor)
+    # 检测系统类型
+    OS_TYPE=$(get_os_type)
+    
     # 更新系统
     update_system
-    
-    # 选择云厂商和检测系统类型
-    CLOUD_VENDOR=$(select_cloud_vendor)
-    OS_TYPE=$(get_os_type)
     
     # 安装Docker
     install_docker "$CLOUD_VENDOR" "$OS_TYPE"
