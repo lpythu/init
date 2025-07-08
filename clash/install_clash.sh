@@ -35,8 +35,8 @@ log_info "开始安装Clash，订阅链接: $CLASH_SUB_URL"
 
 # 安装必要的包
 log_info "安装必要的包..."
-apt-get update
-apt-get install -y git expect
+apt update
+apt install -y git expect
 
 # 创建临时目录
 TEMP_DIR=$(mktemp -d)

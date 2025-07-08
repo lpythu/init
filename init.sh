@@ -2,7 +2,7 @@
 
 # 云服务器初始化脚本
 # 支持腾讯云、阿里云的 Ubuntu/Debian 系统
-# 使用方法: bash <(curl -fsSL https://cdn.jsdelivr.net/gh/lpythu/init/init.sh)
+# 使用方法: bash <(curl -fsSL https://fastly.jsdelivr.net/gh/lpythu/init/init.sh)
 
 set -e
 
@@ -24,33 +24,30 @@ log_error() {
     echo -e "${RED}[ERROR]${NC} $1"
 }
 
-# 检测云厂商
-get_cloud_vendor() {
-    log_info "检测云厂商..."
+# 选择云厂商
+select_cloud_vendor() {
+    log_info "请选择云厂商:"
     
-    # 检测腾讯云
-    if curl -s --connect-timeout 3 http://metadata.tencentyun.com/meta-data/ >/dev/null 2>&1; then
-        echo "tencent"
-        log_info "检测到腾讯云"
-        return
-    fi
+    PS3="请选择云厂商 (使用方向键选择，回车确认): "
+    options=("腾讯云" "阿里云")
     
-    # 检测阿里云
-    if curl -s --connect-timeout 3 http://100.100.100.200/latest/meta-data/ >/dev/null 2>&1; then
-        echo "aliyun"
-        log_info "检测到阿里云"
-        return
-    fi
-    
-    # 检测华为云
-    if curl -s --connect-timeout 3 http://169.254.169.254/openstack/latest/meta_data.json >/dev/null 2>&1; then
-        echo "huawei"
-        log_info "检测到华为云"
-        return
-    fi
-    
-    echo "other"
-    log_warn "未能检测到云厂商，将使用默认配置"
+    select choice in "${options[@]}"; do
+        case $choice in
+            "腾讯云")
+                echo "tencent"
+                log_info "已选择腾讯云"
+                break
+                ;;
+            "阿里云")
+                echo "aliyun"
+                log_info "已选择阿里云"
+                break
+                ;;
+            *)
+                log_error "无效选择，请重新选择"
+                ;;
+        esac
+    done
 }
 
 # 检测操作系统类型
@@ -87,6 +84,8 @@ check_root() {
 update_system() {
     log_info "更新系统包..."
     apt update -y
+    log_info "升级系统包..."
+    apt upgrade -y
 }
 
 # 安装Docker
@@ -100,10 +99,10 @@ install_docker() {
         "tencent")
             case "$os_type" in
                 "ubuntu")
-                    bash <(curl -fsSL https://cdn.jsdelivr.net/gh/lpythu/init/docker/install_tencent_ubuntu.sh)
+                    bash <(curl -fsSL https://fastly.jsdelivr.net/gh/lpythu/init/docker/install_tencent_ubuntu.sh)
                     ;;
                 "debian")
-                    bash <(curl -fsSL https://cdn.jsdelivr.net/gh/lpythu/init/docker/install_tencent_debian.sh)
+                    bash <(curl -fsSL https://fastly.jsdelivr.net/gh/lpythu/init/docker/install_tencent_debian.sh)
                     ;;
                 *)
                     log_error "腾讯云暂不支持 $os_type 系统"
@@ -114,10 +113,10 @@ install_docker() {
         "aliyun")
             case "$os_type" in
                 "ubuntu")
-                    bash <(curl -fsSL https://cdn.jsdelivr.net/gh/lpythu/init/docker/install_aliyun_ubuntu.sh)
+                    bash <(curl -fsSL https://fastly.jsdelivr.net/gh/lpythu/init/docker/install_aliyun_ubuntu.sh)
                     ;;
                 "debian")
-                    bash <(curl -fsSL https://cdn.jsdelivr.net/gh/lpythu/init/docker/install_aliyun_debian.sh)
+                    bash <(curl -fsSL https://fastly.jsdelivr.net/gh/lpythu/init/docker/install_aliyun_debian.sh)
                     ;;
                 *)
                     log_error "阿里云暂不支持 $os_type 系统"
@@ -126,8 +125,8 @@ install_docker() {
             esac
             ;;
         *)
-            log_warn "未知云厂商，使用默认Docker安装方式"
-            bash <(curl -fsSL https://cdn.jsdelivr.net/gh/lpythu/init/docker/install_default.sh)
+            log_error "不支持的云厂商"
+            exit 1
             ;;
     esac
     
@@ -143,7 +142,7 @@ install_docker() {
 # 安装Clash
 install_clash() {
     log_info "开始安装Clash..."
-    bash <(curl -fsSL https://cdn.jsdelivr.net/gh/lpythu/init/clash/install_clash.sh)
+    bash <(curl -fsSL https://fastly.jsdelivr.net/gh/lpythu/init/clash/install_clash.sh)
 }
 
 # 安装zsh和oh-my-zsh
@@ -175,8 +174,8 @@ main() {
     # 更新系统
     update_system
     
-    # 检测云厂商和系统类型
-    CLOUD_VENDOR=$(get_cloud_vendor)
+    # 选择云厂商和检测系统类型
+    CLOUD_VENDOR=$(select_cloud_vendor)
     OS_TYPE=$(get_os_type)
     
     # 安装Docker

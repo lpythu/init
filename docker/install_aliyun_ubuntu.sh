@@ -26,17 +26,17 @@ log_info "开始安装Docker (阿里云 Ubuntu)..."
 
 # 更新包管理工具
 log_info "更新包管理工具..."
-apt-get update
+apt update
 
 # 添加Docker软件包源
 log_info "添加Docker软件包源..."
-apt-get -y install apt-transport-https ca-certificates curl software-properties-common
+apt -y install apt-transport-https ca-certificates curl software-properties-common
 curl -fsSL http://mirrors.cloud.aliyuncs.com/docker-ce/linux/ubuntu/gpg | apt-key add -
 add-apt-repository -y "deb [arch=$(dpkg --print-architecture)] http://mirrors.cloud.aliyuncs.com/docker-ce/linux/ubuntu $(lsb_release -cs) stable"
 
 # 安装Docker社区版本
 log_info "安装Docker社区版本..."
-apt-get -y install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+apt -y install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
 # 启动Docker
 log_info "启动Docker..."

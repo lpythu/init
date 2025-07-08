@@ -4,7 +4,7 @@
 
 ## 功能特性
 
-- 🔍 **自动检测**：自动识别腾讯云、阿里云等云厂商和Ubuntu/Debian系统
+- 🔍 **交互选择**：手动选择腾讯云或阿里云，自动检测Ubuntu/Debian系统
 - 🐳 **Docker安装**：根据不同云厂商使用对应的镜像源安装Docker
 - 🌐 **Clash代理**：自动安装和配置Clash代理服务
 - 🐚 **Shell优化**：安装zsh和oh-my-zsh，提升命令行体验
@@ -17,7 +17,6 @@
 |--------|--------|--------|
 | 腾讯云 | ✅ | ✅ |
 | 阿里云 | ✅ | ✅ |
-| 其他云厂商 (使用默认安装)  | ✅| ✅ |
 
 ## 快速开始
 
@@ -25,7 +24,7 @@
 
 ```bash
 # 运行初始化脚本
-bash <(curl -fsSL https://cdn.jsdelivr.net/gh/lpythu/init/init.sh)
+bash <(curl -fsSL https://fastly.jsdelivr.net/gh/lpythu/init/init.sh)
 ```
 
 ### 手动安装
@@ -66,10 +65,12 @@ bash init.sh
 - 需要网络连接
 
 ### 安装流程
-1. 自动检测云厂商和系统类型
-2. 安装Docker（根据云厂商选择最优镜像源）
-3. 安装Clash（会提示输入订阅链接）
-4. 安装zsh和oh-my-zsh
+1. 手动选择云厂商（腾讯云或阿里云）
+2. 自动检测系统类型（Ubuntu或Debian）
+3. 更新并升级系统包
+4. 安装Docker（根据云厂商选择最优镜像源）
+5. 安装Clash（会提示输入订阅链接）
+6. 安装zsh和oh-my-zsh
 
 ### 安装完成后
 1. 重启服务器或重新登录以使用zsh
@@ -86,8 +87,7 @@ init/
 │   ├── install_tencent_ubuntu.sh
 │   ├── install_tencent_debian.sh
 │   ├── install_aliyun_ubuntu.sh
-│   ├── install_aliyun_debian.sh
-│   └── install_default.sh
+│   └── install_aliyun_debian.sh
 └── clash/                    # Clash安装脚本
     └── install_clash.sh
 ```
@@ -100,7 +100,7 @@ init/
    ```bash
    # 确保使用root权限运行
    sudo su -
-   bash <(curl -fsSL https://cdn.jsdelivr.net/gh/lpythu/init/init.sh)
+   bash <(curl -fsSL https://fastly.jsdelivr.net/gh/lpythu/init/init.sh)
    ```
 
 2. **网络连接问题**
@@ -145,4 +145,4 @@ MIT License
 - 初始版本发布
 - 支持腾讯云、阿里云的Ubuntu/Debian系统
 - 自动安装Docker、Clash、zsh+oh-my-zsh
-- 通过jsDelivr CDN加速访问 
+- 通过fastly.jsdelivr.net CDN加速访问 
