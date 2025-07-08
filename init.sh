@@ -27,24 +27,24 @@ log_error() {
 # 选择云厂商
 select_cloud_vendor() {
     log_info "请选择云厂商:"
+    echo "1) 腾讯云"
+    echo "2) 阿里云"
     
-    PS3="请选择云厂商 (使用方向键选择，回车确认): "
-    options=("腾讯云" "阿里云")
-    
-    select choice in "${options[@]}"; do
+    while true; do
+        read -p "请输入选择 (1-2): " choice
         case $choice in
-            "腾讯云")
+            1)
                 echo "tencent"
                 log_info "已选择腾讯云"
                 break
                 ;;
-            "阿里云")
+            2)
                 echo "aliyun"
                 log_info "已选择阿里云"
                 break
                 ;;
             *)
-                log_error "无效选择，请重新选择"
+                log_error "无效选择，请输入 1 或 2"
                 ;;
         esac
     done
