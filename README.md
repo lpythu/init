@@ -25,14 +25,14 @@
 
 ```bash
 # 运行初始化脚本
-bash <(curl -fsSL https://cdn.jsdelivr.net/gh/lpy/init/init.sh)
+bash <(curl -fsSL https://cdn.jsdelivr.net/gh/lpythu/init/init.sh)
 ```
 
 ### 手动安装
 
 1. 克隆仓库
 ```bash
-git clone https://github.com/lpy/init.git
+git clone https://github.com/lpythu/init.git
 cd init
 ```
 
@@ -100,7 +100,7 @@ init/
    ```bash
    # 确保使用root权限运行
    sudo su -
-   bash <(curl -fsSL https://cdn.jsdelivr.net/gh/lpy/init/init.sh)
+   bash <(curl -fsSL https://cdn.jsdelivr.net/gh/lpythu/init/init.sh)
    ```
 
 2. **网络连接问题**
