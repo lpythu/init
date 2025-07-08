@@ -2,7 +2,7 @@
 
 # 云服务器初始化脚本
 # 支持腾讯云、阿里云的 Ubuntu/Debian 系统
-# 使用方法: bash <(curl -fsSL https://fastly.jsdelivr.net/gh/lpythu/init/init.sh)
+# 使用方法: bash <(curl -fsSL https://raw.githubusercontent.com/lpythu/init/main/init.sh)
 
 set -e
 
@@ -99,10 +99,10 @@ install_docker() {
         "tencent")
             case "$os_type" in
                 "ubuntu")
-                    bash <(curl -fsSL https://fastly.jsdelivr.net/gh/lpythu/init/docker/install_tencent_ubuntu.sh)
+                    bash <(curl -fsSL https://raw.githubusercontent.com/lpythu/init/main/docker/install_tencent_ubuntu.sh)
                     ;;
                 "debian")
-                    bash <(curl -fsSL https://fastly.jsdelivr.net/gh/lpythu/init/docker/install_tencent_debian.sh)
+                    bash <(curl -fsSL https://raw.githubusercontent.com/lpythu/init/main/docker/install_tencent_debian.sh)
                     ;;
                 *)
                     log_error "腾讯云暂不支持 $os_type 系统"
@@ -113,10 +113,10 @@ install_docker() {
         "aliyun")
             case "$os_type" in
                 "ubuntu")
-                    bash <(curl -fsSL https://fastly.jsdelivr.net/gh/lpythu/init/docker/install_aliyun_ubuntu.sh)
+                    bash <(curl -fsSL https://raw.githubusercontent.com/lpythu/init/main/docker/install_aliyun_ubuntu.sh)
                     ;;
                 "debian")
-                    bash <(curl -fsSL https://fastly.jsdelivr.net/gh/lpythu/init/docker/install_aliyun_debian.sh)
+                    bash <(curl -fsSL https://raw.githubusercontent.com/lpythu/init/main/docker/install_aliyun_debian.sh)
                     ;;
                 *)
                     log_error "阿里云暂不支持 $os_type 系统"
@@ -142,7 +142,7 @@ install_docker() {
 # 安装Clash
 install_clash() {
     log_info "开始安装Clash..."
-    bash <(curl -fsSL https://fastly.jsdelivr.net/gh/lpythu/init/clash/install_clash.sh)
+    bash <(curl -fsSL https://raw.githubusercontent.com/lpythu/init/main/clash/install_clash.sh)
 }
 
 # 安装zsh和oh-my-zsh

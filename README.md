@@ -9,7 +9,6 @@
 - 🌐 **Clash代理**：自动安装和配置Clash代理服务
 - 🐚 **Shell优化**：安装zsh和oh-my-zsh，提升命令行体验
 - 🎨 **彩色输出**：友好的彩色日志输出，便于查看安装进度
-- ⚡ **国内加速**：通过jsDelivr CDN加速访问，确保国内服务器可正常使用
 
 ## 支持的云厂商和系统
 
@@ -24,7 +23,7 @@
 
 ```bash
 # 运行初始化脚本
-bash <(curl -fsSL https://fastly.jsdelivr.net/gh/lpythu/init/init.sh)
+bash <(curl -fsSL https://raw.githubusercontent.com/lpythu/init/main/init.sh)
 ```
 
 ### 手动安装
@@ -100,7 +99,7 @@ init/
    ```bash
    # 确保使用root权限运行
    sudo su -
-   bash <(curl -fsSL https://fastly.jsdelivr.net/gh/lpythu/init/init.sh)
+   bash <(curl -fsSL https://raw.githubusercontent.com/lpythu/init/main/init.sh)
    ```
 
 2. **网络连接问题**
@@ -145,4 +144,3 @@ MIT License
 - 初始版本发布
 - 支持腾讯云、阿里云的Ubuntu/Debian系统
 - 自动安装Docker、Clash、zsh+oh-my-zsh
-- 通过fastly.jsdelivr.net CDN加速访问 
