@@ -27,8 +27,8 @@ log_error() {
 # 选择云厂商
 select_cloud_vendor() {
     log_info "请选择云厂商:"
-    echo "1) 腾讯云"
-    echo "2) 阿里云"
+    log_info "1) 腾讯云"
+    log_info "2) 阿里云"
     
     while true; do
         read -p "请输入选择 (1-2): " choice
