@@ -94,6 +94,8 @@ install_docker() {
     local os_type=$2
     
     log_info "开始安装Docker..."
+    log_info "云厂商: $cloud_vendor"
+    log_info "系统类型: $os_type"
     
     case "$cloud_vendor" in
         "tencent")
@@ -173,8 +175,10 @@ main() {
     
     # 选择云厂商
     CLOUD_VENDOR=$(select_cloud_vendor)
+    log_info "选择的云厂商: $CLOUD_VENDOR"
     # 检测系统类型
     OS_TYPE=$(get_os_type)
+    log_info "检测到的系统类型: $OS_TYPE"
     
     # 更新系统
     update_system
